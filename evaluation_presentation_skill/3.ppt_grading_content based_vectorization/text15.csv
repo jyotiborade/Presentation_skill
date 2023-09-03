@@ -1,0 +1,1887 @@
+﻿no,text
+1," Operating System What is an Operating System? A program that acts as an intermediary between a user of a computer and the computer hardware
+Operating system goals:
+Execute user programs and make solving user problems easier
+Make the computer system convenient to use
+Use the computer hardware in an efficient manner Four Components of a Computer System What Operating Systems Do Depends on the point of view
+Users want convenience, ease of use and good performance 
+Don’t care about resource utilization
+But shared computer such as mainframe or minicomputer must keep all users happy
+Users of dedicate systems such as workstations have dedicated resources but frequently use shared resources from servers
+Handheld computers are resource poor,  optimized for usability and battery life
+Some computers have little or no user interface, such as embedded computers in devices and automobiles Operating System Definition 
+OS is a resource allocator
+Manages all resources
+Decides between conflicting requests for efficient and fair resource use
+OS is a control program
+Controls execution of programs to prevent errors and improper use of the computer Operating System Definition (Cont.) No universally accepted definition
+“Everything a vendor ships when you order an operating system” is a good approximation
+But varies wildly
+“The one program running at all times on the computer” is the kernel.  
+Everything else is either
+a system program (ships with the operating system) , or
+an application program. Computer Startup bootstrap program is loaded at power-up or reboot
+Typically stored in ROM or EPROM, generally known as firmware
+Initializes all aspects of system
+Loads operating system kernel and starts execution Computer System Organization Computer-system operation
+One or more CPUs, device controllers connect through common bus providing access to shared memory
+Concurrent execution of CPUs and devices competing for memory cycles
+ Computer-System Operation I/O devices and the CPU can execute concurrently
+Each device controller is in charge of a particular device type
+Each device controller has a local buffer
+CPU moves data from/to main memory to/from local buffers
+I/O is from the device to local buffer of controller
+Device controller informs CPU that it has finished its operation by causing an interrupt Process Management A process is a program in execution. It is a unit of work within the system. Program is a passive entity, process is an active entity.
+Process needs resources to accomplish its task
+CPU, memory, I/O, files
+Initialization data
+Process termination requires reclaim of any reusable resources
+Single-threaded process has one program counter specifying location of next instruction to execute
+Process executes instructions sequentially, one at a time, until completion
+Multi-threaded process has one program counter per thread
+Typically system has many processes, some user, some operating system running concurrently on one or more CPUs
+Concurrency by multiplexing the CPUs among the processes / threads
+ Process Management Activities      
+Creating and deleting both user and system processes
+Suspending and resuming processes
+Providing mechanisms for process synchronization
+Providing mechanisms for process communication
+Providing mechanisms for deadlock handling The operating system is responsible for the following activities in connection with process management: Memory Management To execute a program all (or part) of the instructions must be in memory
+All  (or part) of the data that is needed by the program must be in memory.
+Memory management determines what is in memory and when
+Optimizing CPU utilization and computer response to users
+Memory management activities
+Keeping track of which parts of memory are currently being used and by whom
+Deciding which processes (or parts thereof) and data to move into and out of memory
+Allocating and deallocating memory space as needed
+ Storage Management OS provides uniform, logical view of information storage
+Abstracts physical properties to logical storage unit  - file
+Each medium is controlled by device (i.e., disk drive, tape drive)
+Varying properties include access speed, capacity, data-transfer rate, access method (sequential or random)
+
+File-System management
+Files usually organized into directories
+Access control on most systems to determine who can access what
+OS activities include
+Creating and deleting files and directories
+Primitives to manipulate files and directories
+Mapping files onto secondary storage
+Backup files onto stable (non-volatile) storage media Mass-Storage Management Usually disks used to store data that does not fit in main memory or data that must be kept for a “long” period of time
+Proper management is of central importance
+Entire speed of computer operation hinges on disk subsystem and its algorithms
+OS activities
+Free-space management
+Storage allocation
+Disk scheduling
+Some storage need not be fast
+Tertiary storage includes optical storage, magnetic tape
+Still must be managed – by OS or applications
+Varies between WORM (write-once, read-many-times) and RW (read-write) I/O Subsystem One purpose of OS is to hide peculiarities of hardware devices from the user
+I/O subsystem responsible for
+Memory management of I/O including buffering (storing data temporarily while it is being transferred), caching (storing parts of data in faster storage for performance), spooling (the overlapping of output of one job with input of other jobs)
+General device-driver interface
+Drivers for specific hardware devices Protection and Security Protection – any mechanism for controlling access of processes or users to resources defined by the OS
+Security – defense of the system against internal and external attacks
+Huge range, including denial-of-service, worms, viruses, identity theft, theft of service
+Systems generally first distinguish among users, to determine who can do what
+User identities (user IDs, security IDs) include name and associated number, one per user
+User ID then associated with all files, processes of that user to determine access control
+Group identifier (group ID) allows set of users to be defined and controls managed, then also associated with each process, file
+Privilege escalation allows user to change to effective ID with more rights"
+2," Operating Systems Introduction to Operating System (OS) What is an Operating System (1)? A modern computer consists of:
+ One or more processors
+ Main memory
+ Disks
+ Printers
+ Various input/output devices.
+Managing all these varied components requires a layer of software – the Operating System (OS). What is an Operating System (2)? An Operating System is a program that acts as an intermediary/interface between a user of a computer and the computer hardware.
+OS goals:
+Control/execute user/application programs.
+Make the computer system convenient to use.
+Ease the solving of user problems.
+Use the computer hardware in an efficient manner.
+ Where does the OS fit in? Services provided by an OS Facilities for program creation
+editors, compilers, linkers, debuggers, etc.
+Program execution
+loading in memory, I/O and file initialization.
+Access to I/O and files
+deals with the specifics of I/O and file formats.
+System access
+resolves conflicts for resource contention.
+protection in access to resources and data. Why are Operating Systems Important? Important to understand and know how to correctly use when writing user applications. 
+Large and complex systems that have a high economic impact and result in interesting problems of management.
+Few actually involved in OS design and implementation but nevertheless many general techniques to be learned and applied. 
+Combines concepts from many other areas of Computer Science: Architecture, Languages, Data Structures, Algorithms, etc. Computer Hardware Organization Computer System Components Hardware – provides basic computing resources (CPU, Memory, I/O devices, Communication).
+Operating System – controls and coordinates use of the hardware among various application programs for various users.
+System & Application Programs – ways in which the system resources are used to solve computing problems of the users (Word processors, Compilers, Web browsers, Database systems, Video games).
+Users – (People, Machines, other computers). Hierarchical view of computer system Static View of System Components Dynamic View of System Components Layers of a Computer System     Computer Hardware Operating-System Utilities Application
+Programs What Operating Systems Do Depends on the point of view.
+Users want convenience, ease of use and good performance 
+Don’t care about resource utilization.
+But a shared computer such as mainframe or minicomputer must keep all users happy.
+Users of dedicate systems such as workstations have dedicated resources but frequently use shared resources from servers.
+Handheld computers are resource poor, optimized for usability and battery life.
+Some computers have little or no user interface, such as embedded computers in devices and automobiles. Views of an Operating System There are three classical views (in literature):
+Resource Manager – manages and allocates resources.
+Control program – controls the execution of user programs and operations of I/O devices.
+Command Executer – Provides an environment for running user commands.
+But one more modern view: the Operating System as a Virtual Machine. 1. Resource Manager Resource Manager:
+Manages and protects multiple computer resources: CPU, Processes, Internal/External memory, Tasks, Applications, Users, Communication channels, etc…
+Handles and allocates resources to multiple users or multiple programs running at the same time and space (e.g., processor time, memory, I/O devices).
+Decides between conflicting requests for efficient and fair resource use (e.g., maximize throughput, minimize response time). 
+Sort of a bottom-up view. OS as a Resource Manager Resource Manager oriented OS names DEC RSX – Resource Sharing eXecutive
+MIT Multics – MULTiplexed Information and Computing Services
+IBM MFT/MVT – Multiple Fixed/Variable Tasks
+IBM MVS – Multiple Virtual Storage
+DEC VMS – Virtual Memory System
+MVS TSO – Time Sharing Option
+CTSS – Compatible Time Sharing System
+IBM VM – Virtual machine 2. Control Program Control Program:
+Manages all the components of a complex computer system in an integrated manner. 
+Controls the execution of user programs and I/O devices to prevent errors and improper use of computer resources. 
+Looks over and protects the computer: Monitor, Supervisor, Executive, Controller, Master, Coordinator …. 
+Sort of a black box view.  Control program oriented OS names Unisys MCP – Master Control Program
+DR CP/M – Control Program/Microcomputer
+IBM VM/CP – VM Control Program
+IBM AIX – Advanced Interactive eXecutive
+DEC RSX – Resource Sharing eXecutive 3. Command Executer Command Executer:
+Interfaces between the users and machine. 
+Supplies services/utilities to users.
+Provides the users with a convenient CLI (Command Language Interface), also called a Shell (in UNIX), for entering the user commands. 
+Sort of a top-down view.  Command Executer oriented OS names IBM AIX – Advanced Interactive Executive
+IBM VM/CMS – Conversational monitor System Modern view: Virtual Machine (1) Operating System as a Virtual Machine:
+An interface between the user and hardware that hides the details of the hardware (e.g., I/O).
+Constructs higher-level (virtual) resources out of lower-level (physical) resources (e.g., files).
+Definition: OS is a collection of software enhancements, executed on the bare hardware, culminating in a high-level virtual machine that serves as an advanced programming environment. 
+virtual machine = software enhancement = extended machine = abstract machine = layer = level = ring. Modern view: Virtual Machine (2) Definition of Operating System There is no universally accepted definition.
+“Everything a vendor ships when you order an operating system” is good approximation but varies widely.
+“The one program running at all times on the computer” is the Kernel.  
+Everything else is either a system program (ships with the operating system) or an application program."
+3," Introduction to Operating System (OS)  What is an Operating System? Computer System = Hardware + Software
+Software = Application Software + System Software(OS)
+An Operating System is a system Software that acts as an intermediary/interface between a user of a computer and the computer hardware.
+Operating system goals:
+Execute user programs and make solving user problems easier
+Make the computer system convenient to use
+Use the computer hardware in an efficient manner
+ Kernel Kernel is a software code that reside in central core of OS. It has complete control over system.
+When operation system boots, kernel is first part of OS to load in main memory. 
+Kernel remains in main memory for entire duration of computer session. The kernel code is usually loaded in to protected area of memory.
+Kernel performs it’s task like executing processes and handling interrupts in kernel space. 
+User performs it’s task  in user area of memory.
+ This memory separation is made in order to prevent user data and kernel data from interfering with each other.
+Kernel does not interact directly with user, but it interacts using SHELL and other programs and hardware.
+ Kernel cont… Kernel includes:-
+1. Scheduler: It allocates the Kernel’s processing time to various processes.
+2. Supervisor: It grants permission to use computer system resources to each process.
+3. Interrupt handler : It handles all requests from the various  hardware devices which compete for kernel services.
+4. Memory manager : allocates space in memory for all users  of kernel service.
+kernel provides services for process management, file management, I/O  management, memory management.
+System calls are used to  provide these type of services.
+
+ System Call System call is the programmatic way in which a computer program/user application requests a service from the kernel of the operating system on which it is executed.
+Application program is just a user-process. Due to security reasons , user applications are not given access to privileged resources(the ones controlled by OS).
+When they need to do any I/O or have some more memory or spawn a process or wait for signal/interrupt, it requests operating system to facilitate all these. This request is made through System Call.
+System calls are also called software-interrupts.
+ Functions of Operating System  1. Process Management A process is a program in execution.
+A process needs certain resources, including CPU time, memory, files, and I/O devices to accomplish its task.
+Simultaneous execution leads to multiple processes. Hence creation, execution and termination of a process  are the most basic functionality of an OS
+If processes are dependent, than they may try to share same resources. thus task of process synchronization  comes to the picture.
+If processes are independent, than a due care needs to be taken to avoid their overlapping in memory area.
+Based on priority, it is important to allow more  important processes to execute first than others.
+
+
+ 2. Memory management Memory is a large array of words or bytes, each with its own address.
+ It is a repository of quickly accessible data shared by the CPU and I/O devices.
+Main memory is a volatile storage device. When the computer made turn off everything stored in RAM will be erased automatically.
+In addition to the physical RAM installed in your computer, most modern operating systems allow your computer to use a virtual memory system. Virtual memory allows your computer to use part of a permanent storage device (such as a hard disk) as extra memory.
+The operating system is responsible for the following activities in connections with memory management:
+Keep track of which parts of memory are currently being used and by whom.
+Decide which processes to load when memory space becomes available.
+Allocate and de-allocate memory space as needed.
+ 3. File Management A file is a collection of related information defined by its creator. 
+File systems provide the conventions for the encoding, storage and management of data on a storage device such as a hard disk.
+FAT12 (floppy disks) 
+FAT16 (DOS and older versions of Windows) 
+FAT32 (older versions of Windows) 
+NTFS (newer versions of Windows) 
+EXT3 (Unix/Linux) 
+HFS+ (Max OS X) 
+The operating system is responsible for the following activities in connections with file management:
+✦ File creation and deletion.
+✦ Directory creation and deletion.
+✦ Support of primitives for manipulating files and directories.
+✦ Mapping files onto secondary storage.
+✦ File backup on stable (nonvolatile) storage media.
+ 4. Device Management or I/O Management Device controllers are components on the motherboard (or on expansion cards) that act as an interface between the CPU and the actual device.
+Device drivers, which are the operating system software components that interact with the devices controllers.
+A special device (inside CPU) called the Interrupt Controller handles the task of receiving interrupt requests and  prioritizes them to be forwarded to the processor. 
+Deadlocks can occur when two (or more) processes have control of different I/O resources that are needed by the other processes, and they are unwilling to give up control of the device.
+It performs the following activities for device management.
+Keeps tracks of all devices connected to system. 
+Designates a program responsible for every device known as  Input/output controller. 
+Decides which process gets access to a certain device and for how long.
+Allocates devices in an effective and efficient way. 
+Deallocates devices when they are no longer required.  History of Operating System The First Generation (1940's to early 1950's)
+No Operating System
+All programming was done in absolute machine language, often by wiring up plug-boards to control the machine’s basic functions.
+The Second Generation (1955-1965)
+First operating system was introduced in the early 1950's.It was called GMOS 
+Created by General Motors for IBM's machine the 701.
+Single-stream batch processing systems
+The Third Generation (1965-1980)
+Introduction of multiprogramming
+Development of Minicomputer
+The Fourth Generation (1980-Present Day)
+Development of PCs
+Birth of Windows/MaC OS Types of Operating Systems Batch Operating System
+Multiprogramming Operating System
+Time-Sharing OS
+Multiprocessing OS
+Distributed OS
+Network OS
+Real Time OS
+Embedded OS  Popular types of OS  Desktop Class
+Windows	
+OS X
+Unix/Linux
+Chrome OS
+Server Class
+Windows Server
+Mac OS X Server
+Unix/Linux
+Mobile Class 
+Android
+iOS
+Windows Phone Linux Linux: An open-source, cross-platform operating system that runs on desktops, notebooks, tablets, and smartphones.
+The name Linux is a combination Linus (the first name of the first developer) and UNIX (another operating system.
+Users are free to modify the code, improve it, and redistribute it, 
+Developers are not allowed to charge money for the Linux kernel itself (the main part of the operating system), but they can charge money for distributions (distros for short).
+ Google Chrome OS Chrome OS. Is a popular thin client operating system.
+Thin client A computer with minimal hardware, designed for a specific task. For example, a thin web client is designed for using the Internet. Server Operating Systems Windows Server
+Familiar GUI interface for those experienced with Windows
+UNIX
+Very mature server capabilities, time-tested, large user community, stable
+Linux
+Free, customizable, many free services and utilities available Tablet and Phone Operating Systems System-on-chip (SoC): An operating system that comes preinstalled on a chip on a portable device such as a smartphone. 
+Popular SoC operating systems:
+iOS: for iPad, iPhone
+Android: for a variety of tablets and phones
+Downloadable applications (apps) from an App store, for example:
+Apple App Store
+Google Play Store
+"
+4,"          Network Operating System 7B-1 7B-2 PC Operating Systems Microsoft Windows is the most popular
+Installed more than other OS combined
+Installed on about 95% of computers
+Apple and Linux represent the other 5% 7B-3 PC Operating Systems DOS
+Disk Operating System
+Single user single-tasking OS
+Command line interface
+16-bit OS
+Powerful
+Fast
+Supports legacy applications 7B-4 DOS Application 7B-5 PC Operating Systems Windows NT
+Designed for a powerful system
+32-bit OS
+Very stable
+Windows NT Workstation
+Single user multi tasking OS
+Windows NT Server
+Multi user multi tasking OS
+Network operating system 7B-6 PC Operating Systems Windows 9x
+95, 98, and Millennium Edition (Me)
+32-bit OS
+Supported 16-bit programs well
+Very pretty not stable OS
+Still found in large corporations
+95 introduced the Start button
+98 introduced active desktop
+Me improved multimedia software 7B-7 PC Operating Systems Windows 2000
+Look of 9x with NT stability
+Optimized for office and developers
+Application software ran very well
+Entertainment software ran very poorly 7B-8 PC Operating Systems Windows XP
+Microsoft’s newest desktop product
+Different look from 2000
+Many different versions
+Digital multimedia support was enhanced
+Communications was enhanced
+Mobile computing became a priority 7B-9 PC Operating Systems UNIX
+Runs on all computer types
+32- or 64-bit
+Very stable and fast
+Command-line interface
+Can cost thousands of dollars 7B-10 PC Operating Systems Linux
+Free or inexpensive version of UNIX
+32-bit OS
+Very stable and fast
+Most flavors are open source
+X Windows GUI
+Command line interface is available 7B-11 Linux Desktop 7B-12 PC Operating Systems Macintosh operating systems
+OS X
+Based on FreeBSD Linux
+Very stable and easy to configure
+Only runs on Mac hardware 7B-13 OS X Desktop 7B-14 NOS Features Network operating system
+Fast and stable
+Runs on servers
+Multi-user and multitasking OS
+32- or 64-bit 7B-15 NOS Features File and print sharing
+Users access the same files
+Hundreds of users use a printer
+Different OS can interact 7B-16 NOS Features Data integrity
+Backups copies data onto tape
+RAID copies data onto other drives
+Redundant Array of Inexpensive Disks
+Relies on two or more hard drives
+May speed access to data 7B-17 NOS Features Data security
+Access to data can be restricted
+Access to server resources is controlled
+Audits can be kept"
+5," Operating System: System Software   1  2 The OS Controls computer functions
+Hardware
+Processor
+Memory 
+Devices
+Provides means for software to work with the CPU
+Responsible for management, scheduling, and interaction of tasks 
+Provides user interface  3 System Software: Utilities   
+
+  Utilities: Programs that perform computer housekeeping tasks
+Manage system resources
+Improve efficiency
+Virus prevention  4 Operating System Categories Four categories:
+Real-time (RTOS)
+Single-user, single-task
+Single-user, multitask
+Multiuser  5 Real-Time Operating Systems Systems with a specific purpose and a certain result
+Uses include:
+Industrial machines
+Robotic devices
+Automobiles
+Video game consoles
+Home appliances  6 Single-User Operating Systems Single-task systems
+Perform one task at a time
+PDAs:
+Pocket PC
+Palm OS
+Windows Mobile
+MS-DOS Multitask systems
+Perform simultaneous tasks
+Windows
+Mac OS
+Linux  7 Multiuser Operating Systems  Known as network operating systems
+Allow access to the computer system by more than one user
+Manage user requests
+Systems include:
+Linux
+UNIX
+Unicos
+Windows Server 2008
+Windows Vista
+Mac OS X
+i5/OS
+z/OS  8 Desktop and Notebook Operating Systems An operating system combined with a processor is known as a platform.
+Microsoft Windows/Intel
+Apple Macintosh/Motorola
+Desktop and notebook operating systems include:
+Microsoft Windows
+Mac OS
+Linux
+UNIX Microsoft Windows Windows Vista(2007) This newest version of Windows, which comes in many versions, provides tighter security and improved graphical capabilities.  9  10 Mac OS First commercially available OS with point-and-click technology (graphical user interface)
+Excellent in:
+Graphics display
+Processing capabilities
+System reliability
+File backup utilities
+Document recovery
+Fewer software applications available than for Windows   11 Linux Open source operating system 
+Based on UNIX
+Stable system
+Free
+May be downloaded from the Internet  12 What the OS Does Provides a user interface
+Manages the CPU
+Manages memory and storage
+Manages hardware and peripheral devices
+Coordinates application software with the CPU  13 The User Interface Enables you to interact with the computer
+Types of interfaces:
+Command-driven interface
+Menu-driven interface
+Graphical user interface (GUI) Command-driven  14 Processor Management Controls the timing of events the processor works on
+Interrupts
+Interrupt handler
+Interrupt table
+Stack   15 Memory and Storage Management The operating system allocates space in RAM for instructions and data. RAM        Operating       System  16 Virtual Memory Instructions and data are stored on the hard drive when RAM is full.
+Swap file
+Paging 
+Thrashing   17 Hardware and Peripheral Device Management Device drivers
+Programs that enable the operating system to communicate with peripheral devices
+Provided by the manufacturer of the device 
+Plug and Play
+Hardware and software standard
+Facilitates the installation of new hardware"
+6," 1: Operating Systems Overview 1  OPERATING SYSTEMS 
+
+OVERVIEW 1: Operating Systems Overview 2 WHAT IS AN OPERATING SYSTEM?
+
+An interface between users and hardware - an environment ""architecture”
+Allows convenient usage; hides the tedious stuff
+Allows efficient usage; parallel activity, avoids wasted cycles
+Provides information protection
+Gives each user a slice of the resources
+Acts as a control program. OPERATING SYSTEM OVERVIEW 1: Operating Systems Overview 3 OPERATING SYSTEM OVERVIEW The Layers Of A System Program Interface  Humans  User Programs  O.S. Interface  O.S.  Hardware Interface/ Privileged Instructions  Disk/Tape/Memory  1: Operating Systems Overview 4 A mechanism for scheduling jobs or processes. Scheduling can be as simple as running the next process, or it can use relatively complex rules to pick a running process.
+
+A method for simultaneous CPU execution and IO handling.  Processing is going on even as IO is occurring in preparation for future CPU work.
+
+Off Line Processing;  not only are IO and CPU happening concurrently, but some off-board processing is occurring with the IO.
+  OPERATING SYSTEM OVERVIEW Components 1: Operating Systems Overview 5 The CPU is wasted if a job waits for I/O. This leads to:
+
+Multiprogramming ( dynamic switching ). While one job waits for a resource, the CPU can find another job to run.  It means that several jobs are ready to run and only need the CPU in order to continue.
+
+CPU scheduling is the subject of Chapter 6.
+
+All of this leads to:
+	memory management
+ 	resource scheduling
+ 	deadlock protection
+
+which are the subject of the rest of this course.
+ OPERATING SYSTEM OVERVIEW Components 1: Operating Systems Overview 6 Other Characteristics include:
+Time Sharing - multiprogramming environment that's also interactive.
+
+Multiprocessing   - Tightly coupled systems that communicate via shared memory.  Used for scientific applications. Used for speed improvement by putting together a number of off-the-shelf processors.
+
+
+
+
+Distributed Systems - Loosely coupled systems that communicate via message passing.  Advantages include resource sharing, speed up, reliability, communication.
+
+
+
+
+
+Real Time Systems - Rapid response time is main characteristic.  Used in control of applications where rapid response to a stimulus is essential. OPERATING SYSTEM OVERVIEW Characteristics 1: Operating Systems Overview 7 OPERATING SYSTEM OVERVIEW Characteristics Interrupts:
+Interrupt transfers control to the interrupt service routine generally, through the interrupt vector, which contains the addresses of all the service routines.
+Interrupt architecture must save the address of the interrupted instruction.
+Incoming interrupts are disabled while another interrupt is being processed to prevent a lost interrupt.
+A trap is a software-generated interrupt caused either by an error or a user request.
+An operating system is interrupt driven. 1: Operating Systems Overview 8 OPERATING SYSTEM OVERVIEW Hardware
+Support These are the devices that make up a typical system. Any of these devices can cause an electrical interrupt that grabs the attention of the CPU. 1: Operating Systems Overview 9 OPERATING SYSTEM OVERVIEW Hardware
+Support Sequence of events for processing an IO request. Comparing Synchronous and Asynchronous IO Operations 1: Operating Systems Overview 10 Caching:
+Important principle, performed at many levels in a computer (in hardware, operating system, software)
+Information in use copied from slower to faster storage temporarily
+Faster storage (cache) checked first to determine if information is there
+If it is, information used directly from the cache (fast)
+If not, data copied to cache and used there
+Cache smaller than storage being cached
+Cache management important design problem
+Cache size and replacement policy OPERATING SYSTEM OVERVIEW Storage
+Hierarchy 1: Operating Systems Overview 11 The goal is protecting the Operating System and others from malicious or ignorant users.
+
+The User/Supervisor Mode and privileged instructions.
+
+Concurrent threads might interfere with others. This leads to protection of resources by user/supervisor mode. These resources include:
+
+I/O Define I/O instructions as privileged; they can be executed only in Supervisor mode. System calls get us from user to supervisor mode.     OPERATING SYSTEM OVERVIEW Protection 1: Operating Systems Overview 12 Memory 	A user program can only access its own logical memory. For instance, it can't modify supervisor code.   Depends on an address translation scheme such as that shown here.  OPERATING SYSTEM OVERVIEW Protection 1: Operating Systems Overview 13 CPU 	A clock prevents programs from using all the CPU time.  This clock causes an interrupt that causes the operating system to gain control from a user program. OPERATING SYSTEM OVERVIEW Protection For machines connected together, this protection must extend across:
+Shared resources,    
+Multiprocessor Architectures,    
+Clustered Systems
+The practice of this is called “distributed operating systems”. 1: Operating Systems Overview 14 WRAPUP We’ve completed our first overview of an Operating System – this was the equivalent of a Satellite picture.
+
+The next view will be at the level of a high flying plane.
+
+After that, we’ll be at ground level, looking at pieces in detail.
+
+ OPERATING SYSTEM OVERVIEW"
+7," Types of Software Software is the set of instructions that tells the hardware what to do
+Two main types of software:
+Operating Systems
+Application Software
+Productivity software
+Utility software
+Programming software
+Applications for the Enterprise (ERP) Operating Systems All devices have an operating system
+Software which manages the hardware 
+Creates the interface between the hardware and the user
+Functions performed by the operating systems:
+Managing the hardware resources of the computer
+Providing the user-interface components
+Providing a platform for software developers to write applications
+Most popular are Microsoft Windows, Apple Mac OS, and Linux
+ History of Microsoft Windows Source:  YouTube Application Software Software that allows users to accomplish some goal or purpose
+Categories:
+Productivity software to help employees complete their job duties such as Microsoft Office
+Utility software allows you to fix or modify your computer
+For example, antivirus software
+Programming software makes more software
+Programmers can code, test, and convert into a format that the computer will understand
+CIS students typically use Visual Studio Application Software Challenges Finding the right software to do what you need to do
+How to use the right software to do what you need to do
+Power Point to Death video:
+
+
+
+
+
+
+You only purchase a license for the software Enterprise Application Software Early applications were often independent from other applications
+Consequently, information from one application did not always correlate to information from another application
+Enterprise Resource Applications (ERP) were developed to provide a common application that supports functions across the entire enterprise for the company’s employees
+For example, an ERP can contain the general ledger and its subsidiary ledgers such as accounts payable, accounts receivables, etc.
+Builds in best business practices for an enterprise Enterprise Application Software SAP is the most popular
+Customer Relationship Management (CRM)
+Manages an organization’s customers
+Personalize your relationship with the customer
+An example is Salesforce
+Supply Chain Management (SCM) manages an organization’s
+
+ Mobile Applications Operate on tablets and smartphones
+Each device has its own operating system (e.g., Android or iOS)
+Each application is developed for the specific mobile device’s operating system
+Websites are now offering mobile friendly interfaces to run on mobile devices 
+Independent of the mobile devices’operating system Cloud Computing Internet-based applications, services,and data storage
+Advantages:
+No software to install or upgrade
+If you have Internet access, you can always use it
+No restrictions on how much you store and don’t have to worry about losing it
+Disadvantages:
+Your information is stored on someone else’s computer – how safe is it?
+Internet access is required
+Relying on someone else to provide these services Business Cloud Usage Private Cloud
+Still uses cloud concepts but allows the business to control over that space
+Improves who can access it and how it is secured
+Virtualization
+Using software to simulate a computer or some other device
+Can create a server without actually purchasing a server
+ Software Creation Software is written in a programming language
+Consists of commands organized logically to execute specific functions
+Written in human-readable format (source code) and converted to machine-readable format (object code)
+Object code can be interpreted by the computer to allow interaction with the hardware
+Usually done in pieces so several programmers can work together
+Closed-Source Software – only object code is available for purchase
+Open-Source Software:
+Code is shared with everyone to use and add features or fix bugs
+Examples are Firefox browser and Linux operating system Open vs. Closed Source Software Open-Source Software:
+Software is available for free
+Source code can be reviewed prior to installing
+Large programmer groups can fix bugs and add feature
+May increase risk of attack as everyone knows how your software works 
+Closed-Source Software:
+Company that developed the software provides technical support
+Employs large number of programmers to enhance the product  Summary Defined the term software
+Described the two primary categories of software
+Described the role ERP software plays in an organization
+Described cloud computing and its advantages and disadvantages for use in an organization
+Defined the term open source and identify its primary characteristics"
+8," Operating System  2 What is an operating system (OS)? Need of Operating System: 
+In earlier day’s user had to design the application according to the internal structure of the hardware. Operating System was needed to enable the user to design the application without concerning the details of the computer’s internal structure. In general the boundary between the hardware & software is transparent to the user.
+The purpose of an operating system is to –provide an environment in which a user can execute programs.
+
+Usage of Operating System:
+Easy interaction between the human & computer.
+Starting computer operation automatically when power in turned on.
+Loading & scheduling users program.
+Controlling input & output.
+Controlling program execution.
+Managing use of main memory.
+Providing security to users program.
+ Definition of Operating System: -
+
+
+An Operating System is an essential component of a computer system. It is a large set of large and complex program that acts as an interface between the computer hardware & its user. Its serves twin objectives, interpreting the user program instructions to the hardware as well as providing coordination services necessary to enable a group of users to share computer system resources efficiently.
+ Goals
+–make the computer system convenient to use
+ –Allow users to use the computer hardware in an efficient manner 
+  Computer  Hardware Slide 5/54 Users
+
+Other  System Software and  Application Programs
+
+Operating System Logical Architecture of a Computer System OS is designed to serve two basic purposes:
+It controls the allocation and use of the computing System’s resources among the various user and tasks.
+It provides an interface between the computer hardware and the programmer that simplifies and makes feasible for coding, creation, debugging of application programs. A. Frank - P.  Weisberg Static View of System Components Every computer must have an operating system to run other programs. The operating system coordinates the use of the hardware among the various system programs and application programs for various users. It simply provides an environment within which other programs can do useful work.
+The operating system is a set of special programs that run on a computer system that allows it to work properly. It performs basic tasks such as recognizing input from the keyboard, keeping track of files and directories on the disk, sending output to the display screen and controlling peripheral devices. Dynamic View of System Components Layers of a Computer System     Computer Hardware Operating-System Utilities Application
+Programs OSes provide environments in which programs run, and services for the users of the system, including: User Interfaces - Means by which users can issue commands to the system. Depending on the system these may be a command-line interface ( e.g. sh, csh, ksh, tcsh, etc. ), a GUI interface ( e.g. Windows, X-Windows, KDE, Gnome, etc. ), or a batch command systems. The latter are generally older systems using punch cards of job-control language, JCL, but may still be used today for specialty systems designed for a single purpose.
+Program Execution - The OS must be able to load a program into RAM, run the program, and terminate the program, either normally or abnormally.
+I/O Operations - The OS is responsible for transferring data to and from I/O devices, including keyboards, terminals, printers, and storage devices.
+File-System Manipulation - In addition to raw data storage, the OS is also responsible for maintaining directory and subdirectory structures, mapping file names to specific blocks of data storage, and providing tools for navigating and utilizing the file system.
+Communications - Inter-process communications, IPC, either between processes running on the same processor, or between processes running on separate processors or separate machines. May be implemented as either shared memory or message passing, ( or some systems may offer both. )
+Error Detection - Both hardware and software errors must be detected and handled appropriately, with a minimum of harmful repercussions. Some systems may include complex error avoidance or recovery systems, including backups, RAID drives, and other redundant systems. Debugging and diagnostic tools aid users and administrators in tracing down the cause of problems
+ Operation of an OS To facilitate scheduling, resource management, and security and protection
+OS maintains various kinds of information to facilitate operation
+Names of registered users
+identification of a user who is executing a specific program
+status of a program
+status of a resource
+which users can access a resource
+OS performs several tasks repeatedly to implement scheduling, resource management, security and protection
+
+ Views of an Operating System There are three classical views (in literature):
+Resource Manager – manages and allocates resources.
+Control program – controls the execution of user programs and operations of I/O devices.
+Command Executer – Provides an environment for running user commands. 1. Resource Manager Manages and protects multiple computer resources: CPU, Processes, Internal/External memory, Tasks, Applications, Users, Communication channels, etc…
+
+Handles and allocates resources to multiple users or multiple programs running at the same time and space (e.g., processor time, memory, I/O devices).
+
+Decides between conflicting requests for efficient and fair resource use (e.g., maximize throughput, minimize response time).  OS as a Resource Manager A. Frank - P.  Weisberg  2. Control Program Manages all the components of a complex computer system in an integrated manner. 
+
+Controls the execution of user programs and I/O devices to prevent errors and improper use of computer resources.  3. Command Executer Interfaces between the users and machine. 
+Supplies services/utilities to users.
+Provides the users with a convenient CLI (Command Language Interface), also called a Shell (in UNIX), for entering the user commands. "
+9," Introduction to Operating Systems  What Is an Operating System? Some years ago an operating system was defined as the software that controls the hardware.
+Landscape of computer systems has evolved significantly, requiring a more complicated definition.
+Applications are now designed to execute concurrently. What Is an Operating System? Separates applications from the hardware they access
+Software layer
+Manages software and hardware to produce desired results
+Operating systems primarily are resource managers
+Hardware
+Processors
+Memory
+Input/output devices
+Communication devices
+Software applications Early History: The 1940s and 1950s Operating systems evolved through several phases
+1940s
+Early computers did not include operating systems
+1950s
+Executed one job at a time
+Included technologies to smooth job-to-job transitions
+Single-stream batch-processing systems
+Programs and data submitted consecutively on tape The 1960s 1960s
+Still batch-processing systems
+Process multiple jobs at once
+Multiprogramming
+One job could use processor while other jobs used peripheral devices
+Advanced operating systems developed to service multiple interactive users
+1964
+IBM announced System/360 family of computers The 1960s Timesharing systems
+Developed to support many simultaneous interactive users
+Turnaround time was reduced to minutes or seconds
+Time between submission of job and the return of its results
+Real-time systems
+Supply response within certain bounded time period
+Improved development time and methods
+MIT used CTSS system to develop its own successor, Multics
+TSS, Multics and CP/CMS all incorporated virtual memory
+Address more memory locations than actually exist
+ The 1970s Primarily multimode timesharing systems
+Supported batch processing, timesharing and real-time applications
+Personal computing only in incipient stages
+Fostered by early developments in microprocessor technology
+Department of Defense develops TCP/IP
+Standard communications protocol
+Widely used in military and university settings
+Security problems
+Growing volumes of information passed over vulnerable communications lines.  The 1980s 1980s
+Decade of personal computers and workstations
+Computing distributed to sites at which it was needed
+Personal computers proved relatively easy to learn and use
+Graphical user interfaces (GUI) 
+Transferring information between computers via networks became more economical and practical The 1980s Client/server computing model became widespread
+Clients request various services
+Servers perform requested services
+Software engineering field continued to evolve
+Major thrust by the United States government aimed at tighter control of Department of Defense software projects
+Realizing code reusability
+Greater degree of abstraction in programming languages
+Multiple threads of instructions that could execute independently
+ 2000 and Beyond Middleware
+Links two separate applications
+Often over a network and between incompatible machines
+Particularly important for Web services
+Simplifies communication across multiple architectures
+Web services 
+Encompass set of related standards
+Ready-to-use pieces of software on the Internet
+Enable any two applications to communicate and exchange data
+ Figure 1.1 Interaction between applications and the operating system. Application Bases Operating System Environments Operating systems intended for high-end environments
+Special design requirements and hardware support needs
+Large main memory
+Special-purpose hardware
+Large numbers of processes
+Embedded systems
+Characterized by small set of specialized resources 
+Provide functionality to devices such as cell phones and PDAs
+Efficient resource management key to building successful operating system Operating System Environments Real-time systems
+Require that tasks be performed within particular (often short) time frame
+Autopilot feature of an aircraft must constantly adjust speed, altitude and direction 
+Such actions cannot wait indefinitely—and sometimes cannot wait at all
+ Figure 1.2 Schematic of a virtual machine. Operating System Environments Core Operating System Components User interaction with operating system 
+Often, through special application called a shell
+Kernel
+Software that contains core components of operating system
+Typical operating system components include: 
+Processor scheduler
+Memory manager
+I/O manager
+Interprocess communication (IPC) manager
+File system manager Core Operating System Components Multiprogrammed environments now common 
+Kernel manages the execution of processes
+Program components which execute independently but use single memory space to share data are called threads. 
+To access I/O device, process must issue system call
+Handled by device driver
+Software component that interacts directly with hardware
+Often contains device-specific commands"
+10," OS Basics What is systems programming? 
+A systems programmer installs, customizes and maintains the operating system
+To do this they need knowledge of
+Hardware
+Storage
+Processor
+Software
+System libraries and data sets
+Current customization  System programming overview OS operational system administration is: 
+Software installation and maintenance
+Customize parameters
+System libraries for software
+System data sets
+z/OS system address spaces and subsystems 
+Real and virtual storage OS Workload Manager 
+Workload manager (WLM) is an address space which manages the tasks running on the system
+Uses an installation-defined policy to determine relative priority of competing workloads
+WLM can also be used to manage hardware resources System performance 
+System tuning is constant and iterative
+Only a real problem when resources are constrained
+WLM is one component
+Can only manage what is set up
+Initial set up of initiators and other resources plays a great part  Job flow 
+Job entry subsystem (JES) controls job flow
+Receives jobs into system
+Initiates the job
+Controls initial output processing
+ I/O device management 
+Input/output device configuration must be defined to both hardware and software
+HCD is used to build an I/O definition file
+This definition can be activated to both software and hardware dynamically
+Sometimes major changes require an IPL of software or POR of hardware
+ Security 
+Protection of data against unauthorized disclosure, transfer, modification or destruction
+Systems programmer installs and maintains the security system
+ Integrity 
+Designed, implemented and maintained to protect against unauthorized access
+Unauthorized software must not be able to access authorized states
+Unauthorized software must not be able to bypass system security such as RACF Availability 
+System availability is designed to be very high
+Many systems require 24 hour 7 day operation"
+11,"  Overview of Operating Systems The Evolution of Operating System Functionality Batch Job Processing
+Linkage of library routines to programs 
+Management of files, I/O devices, secondary storage
+Multiprogramming
+Resource managment and sharing for multiple programs 
+Quasi-simultaneous program execution
+Single user 
+Multiuser/Timesharing Systems
+Management of multiple simultaneous users interconnected via terminals 
+Fair resource management: CPU scheduling, spooling, mutual exclusion 
+Real-Time Systems (process control systems)
+Management of time-critical processes 
+High requirements with respect to reliability and availability Tasks of an Operating System Processor management - Scheduling 
+Fairness 
+Non-blocking behavior
+Priorities
+Memory management
+Virtual versus physical memory, memory hierarchy
+Protection of competing/conurrent programs
+Storage management – File system 
+Access to external storage media 
+Device management
+Hiding of hardware dependencies 
+Management of concurrent accesses 
+Batch processing
+Definition of an execution order; throughput maximization Kernel- and User Mode Programs Typical functionality implemented in either mode:
+Kernel: 
+Privileged mode
+Strict assumptions about reliability/security of code
+Memory resident
+CPU-, memory-, Input/Output managment
+Multiprocessor management, diagnosis, test 
+Parts of file system and of the networking interface 
+User Space: 
+More flexible
+Simpler maintenance and debugging
+Compiler, assembler, interpreter, linker/loader
+File system management, telecommunication, network management 
+Editors, spreadsheets, user applications Layered Model of Operating System Concepts nr 	name 			typical objects 		typical operations 
+1 	Integrated circuits	register, gate, bus 		Nand, Nor, Exor 
+2	Machine language	instruction counter, ALU  	Add, Move, Load, Store 
+3 	Subroutine linkage	procedure block 		Stack Call, JSR, RTS 
+4 	Interrupts	 	interrupt handlers		Bus error, Reset 
+5	Simple processes 	process, semaphore	wait, ready, execute 
+6 	Local memory 		data block, I/O channel 	read, write, open, close 
+7 	Virtual model 		page, frame 		read, write, swap 
+8 	Process communication 	channel (pipe), message 	read, write, open 
+9 	File management 	files			read, write, open, copy 
+10 	Device management	ext.memory, terminals 	read, write 
+11 	I/O data streams 	data streams		open, close, read, write 
+12 	User processes		user processes		login, logout, fork 
+13 	Directory management	internal tables		create, delete, modify 
+14 	Graphical user interface	window, menu, icon 	OS system calls Operating Systems Evolution  55
+
+60
+
+65
+
+70
+
+75
+
+80
+
+85
+
+90
+
+95
+
+00
+
+03 IOCS DOS/360 DOS/VDSE VS VS/ESA OS/360 MVS/370 MVS/XA MVS/ES TSO IBSYS CTSS CP/CM5 VM/370 VM/XA VM/ESA SYSTEM III SYSTEM V SYSTEM V.4 MULTICS UNIX UNIXV.7 AIX/370 AIX SUN OS POSIX SOLARIS 2 4.1BSD 4.2BSD 4.3BSD 4.4BSD MACH OSF/1 AIX/ESA XENIX MS-DOS 1.0 CP/M DR/DOS OS/2 WIN 3.0 WIN NT WIN 2000 WIN 9X WIN XP LINUX                                                   RSX-11M VMS 1.0 VMS 5.4 VMS 7.3    WIN 3.1   SOLARIS 10  RT-11     LINUX 2.6 WIN Server 2003  Structuring of Operating Systems Monolithical systems 
+Unstructured
+Supervisor call changes
+	from user mode into 
+	kernel mode
+ App App System services      Hardware                OS 
+procedures  User Mode Kernel Mode Layered OS Each layer is given access only to lower-level interfaces Application
+Program Application
+Program Application
+Program  System Services File System  Memory and I/O Device Management  Processor Scheduling Hardware         User Mode Kernel Mode Microkernel OS(Client/server OS) Kernel implements:
+Scheduling
+Memory Management
+Interprocess communication (IPC)
+User-mode servers MemoryServer ClientApp Network Server ProcessServer FileServer DisplayServer Microkernel Hardware             request reply  User Mode Kernel Mode VMS and Windows- a bird’s-eye view on architectures  System-wide data structures Memory Management I/O Subsystem Process andtime management System servicesKernel Record Management Service (RMS)Executive Command Language Interpreter (CLI)Supervisor Platform-Adaptation Layer (PAL) - Alpha Support Libraries Utilities Program Development Tools Layered Products(Apps) User  Layered design for VAX/VMSoperating system Windows high-level architecture       OS/2 Windows POSIX   Environment Subsystems   Windows
+User/GDI
+Device
+Driver  Executive Device Drivers Kernel Hardware Abstraction Layer (HAL) User
+Mode Kernel
+Mode  System
+& ServiceProcesses   Windows     Release History Although product name has varied, internally, each version identified by a “build number”
+Internal identification - increments each time NT is built from source (5-6 times a week)
+Interesting timeline:http://windows2000.about.com/library/weekly/aa010218a.htm 
+Build#		Version					Date
+297		PDC developer release			Jul 1992
+511		NT 3.1					Jul 1993
+807		NT 3.5					Sep 1994
+1057		NT 3.51					May 1995
+1381		NT 4.0					Jul 1996
+2195		Windows 2000 (NT 5.0)			Dec 1999
+2600		Windows XP (NT 5.1)			Aug 2001
+3790		Windows Server 2003 (NT 5.2)		Mar 2003
+4051		Longhorn PDC Developer Preview	Oct 2003
+
+ Within the CRK, the term Windows refers to Windows 2000, XP, Server 2003 Windows And Linux Evolution Windows and Linux kernels are based on foundations developed in the mid-1970s  1970 1980 1990 2000          VMS v1.0 Windows NT 3.1    NT 4.0 Windows 2000 Windows XP Server 2003    1970 1980 1990 2000            UNIX born UNIX public UNIX V6 Linux v1.0    v2.0 v2.2 v2.3 v2.4 v2.6   (see http://www.levenez.com for diagrams showing history of Windows & Unix) Further Reading Dennis M. Ritchie, The Evolution of the Unix Time-sharing System, 
+in Proc. of Lang. Design and Programming Meth. Conf., Sydney, Australia, Sept 1979, Lecture Notes in Computer Science #79, Springer-Verlag, 1980.
+David Donald Miller, OpenVMS Operating System Concepts, 
+2nd Ed., Digital Press, 1997.
+History of Digital Operating Systems (from pp. 447)
+Mark E. Russinovich and David A. Solomon, Microsoft Windows Internals, 
+4th Edition, Microsoft Press, 2004.
+Historical Perspective (from pp. xix)
+G. Pascal Zachary, Show Stopper! The Breakneck Race to Create Windows NT and the Next Generation at Microsoft, 
+ISBN: 0029356717, Free Press, 1994."
+12," Distributed Systems  1 Distributed Operating Systems Distributed Systems  2 Examples of Distributed Systems 
+Transactional applications - Banking systems
+Manufacturing and process control
+Inventory systems
+General purpose (university, office automation)
+Communication – email, IM, VoIP, social networks
+Distributed information systems 
+ WWW
+ Cloud Computing Infrastructures
+ Federated and Distributed Databases Distributed Systems  3 Mobile  & ubiquitous distributed systems Distributed Systems  4 A Distributed CyberPhysical Space – UCI Responsphere  4  
+Campus-wide infrastructure to instrument, experiments, monitor, disaster drills & to validate technologies
+
+sensing, communicating,  storage & computing infrastructure
+
+Software for real-time collection, analysis, and processing of sensor information
+
+used to create real time information awareness & post-drill analysis Peer to Peer Systems Distributed Systems  5 Use the vast resources of machines at the edge of the Internet to build a network that allows resource sharing without any central authority. P2P File Sharing
+Napster, Gnutella, Kazaa, eDonkey, BitTorrent
+Chord, CAN, Pastry/Tapestry, Kademlia
+
+P2P Communications
+MSN, Skype, Social Networking Apps
+
+P2P Distributed Computing
+Seti@home Distributed Systems  6 Why Distributed Computing? Inherent distribution
+Bridge customers, suppliers, and companies at different sites.
+Speedup - improved performance
+Fault tolerance
+Resource Sharing
+Exploitation of special hardware
+Scalability
+Flexibility Distributed Systems  7 Why are Distributed Systems Hard? Scale
+numeric, geographic, administrative
+Loss of control over parts of the system
+Unreliability of message passing
+unreliable communication, insecure communication, costly communication
+Failure 
+Parts of the system are down or inaccessible
+Independent failure is desirable Distributed Systems  8 Design goals of a distributed system Sharing
+HW, SW, services, applications
+Openness(extensibility)
+use of standard interfaces, advertise services, microkernels
+Concurrency
+compete vs. cooperate
+Scalability
+avoids centralization
+Fault tolerance/availability
+Transparency 
+location, migration, replication, failure, concurrency Distributed Systems  9 Classifying Distributed Systems Based on degree of synchrony
+Synchronous
+Asynchronous
+Based on communication medium
+Message Passing
+Shared Memory
+Fault model
+Crash failures
+Byzantine failures Distributed Systems  10 Concurrency issues Consider the requirements of transaction based systems
+Atomicity - either all effects take place or none
+Consistency - correctness of data
+Isolated - as if there were one serial database
+Durable - effects are not lost
+General correctness of distributed computation
+Safety
+Liveness Distributed Systems  11 Communication in Distributed Systems Provide support for entities to communicate among themselves
+Centralized (traditional) OS’s - local communication support
+Distributed systems - communication across machine boundaries (WAN, LAN).
+2 paradigms
+Message Passing
+Processes communicate by sharing messages
+Distributed Shared Memory (DSM)
+Communication through a virtual shared memory. Distributed Systems  12 Reliability issues Unreliable communication
+Best effort, No ACK’s or retransmissions
+Application programmer designs own reliability mechanism
+Reliable communication
+Different degrees of reliability
+Processes have some guarantee that messages will be delivered.
+Reliability mechanisms - ACKs, NACKs. Distributed Systems  13 Remote Procedure Call Builds on message passing
+extend traditional procedure call to perform transfer of control and data across network
+Easy to use - fits well with the client/server model.
+Helps programmer focus on the application instead of the communication protocol.
+Server is a collection of exported procedures on some shared resource
+Variety of RPC semantics
+“maybe call” 
+“at least once call”
+“at most once call”  Distributed Systems  14 Other Distributed System issues Concurrency and Synchronization
+Distributed Deadlocks
+Time in distributed systems
+Naming
+Replication 
+improve availability and performance
+Migration 
+of processes and data
+Security 
+eavesdropping, masquerading, message tampering, replaying Distributed Systems  15 Distributed Systems Middleware  
+Middleware is the software between the application programs and the operating System and base networking
+Integration Fabric that knits together applications, devices, systems software, data 
+Middleware provides a comprehensive set of higher-level distributed computing capabilities and a set of interfaces to access the capabilities of the system.
+ Distributed Systems  16 The Evergrowing Middleware Alphabet Soup Distributed 
+Computing 
+Environment (DCE)‏ Object Request Broker
+ (ORB)‏ opalORB Distributed Component
+ Object Model (DCOM)  ZEN RTCORBA JINITM Remote Method
+ Invocation
+ (RMI)‏ Remote Procedure Call
+ (RPC)‏ Enterprise
+JavaBeans
+Technology
+ (EJB)‏ BEA WebLogic®  Encina/9000 Extensible Markup Language (XML)‏ SOAP EAI Orbix ORBlite WS-BPEL
+WSIL  WSDL XQuery
+
+XPath BEA Tuxedo® Message Queuing (MSMQ)‏ Borland® VisiBroker® IDL IOP
+ IIOP
+ GIOP Rendezvous BPEL Java Transaction API (JTA)‏ JNDI JMS LDAP"
+13," 2/2/2022 1 Introduction to Operating Systems  An Operating System? What is an Operating System?
+A program that acts as an intermediary between a user of a computer and the computer hardware.
+What is the purpose of an operating system?
+To provide an environment in which a user can execute programs.
+What are the goals of an Operating System?
+The primary goal of an Operating System is to make the computer system convenient to use.
+The secondary goal is to make the computer system efficient to use. 2/2/2022 2 Computer System Components Hardware – provides basic computing resources (CPU, memory, I/O devices).
+Operating system – controls and coordinates the use of the hardware among the various application programs for the various users.
+Applications programs – define the ways in which the system resources are used to solve the computing problems of the users (compilers, database systems, video games, business programs).
+Users (people, machines, other computers).  2/2/2022 3 Abstract View of System Components 2/2/2022 4 Function of Operating System OS as Extended machine
+Computer Architecture shows that computer is made up of chips and wires
+We do not want to program on the bare metal
+Virtual machine creates a hardware abstraction
+Abstract machine can provide hardware independent interfaces
+Increase portability
+Allow greater protection
+Implication is that it is much faster and easier to program with less errors 2/2/2022 5 Function of Operating System OS as resource manager
+Coordination and control of limited resources such as memory, disk, network, etc
+Deal with resource conflicts
+Deal with resource fairness
+Make access efficient as possible
+ 2/2/2022 6 Parts of an Operating System No universal agreement on the topic, but most likely
+Memory Management
+IO Management
+CPU Scheduling
+IPC
+MultiTasking/Multiprogramming
+(On some Operating System, this functionality is provided by a single program known as the kernel)
+What about?
+File System
+Multimedia Support
+UI (X Windows, MSWin)
+Internet Browser?
+Why would extras be important 2/2/2022 7 2/2/2022 8 Evolution (History) of OS First Generation: Punched cards
+Second Generation: Transistors and batch systems.
+Third Generation: (Integrated Circuits)
+Spooling
+Multiprogramming
+Multitasking
+Virtual Memory Multiprogramming Memory partitioned into several pieces
+CPU Starts a job
+If the job is waiting for IO, the CPU can switch to another task
+ 2/2/2022 9 Multitasking (Time-sharing) Extension of Multiprogramming
+Need for user interactivity
+Instead of switching jobs when waiting for IO, a timer causes jobs to switch
+User interacts with computer via CRT and keyboard
+Systems have to balance CPU utilization against response time
+Better device management
+Need for file system to allow user to access data and code
+Need to provide user with an “interaction environment” 2/2/2022 10 Virtual Memory Programs can be larger than memory
+Program loaded into memory as needed
+Active program and data “swapped” to a disk until needed
+Memory space treated uniformly 2/2/2022 11 Why Operating Systems? OS for CSE :
+Real world OS is a software engineering problem
+Design of the Virtual/Extended machine
+Development of the Kernel
+OS Usability, Human Factors for OS
+OS for CSE:
+New algorithms to help make OS better, more efficient
+Hypothesis, experiments regarding OS approaches
+OS for anyone else :
+Help to understand better the parts of the OS and how to compare and contrast the various qualities of Operating Systems 2/2/2022 12"
+14," 1 OS  2 Introduction A computer system consists of
+hardware
+system programs
+application programs 3 What is an Operating System It is an extended machine
+Hides the messy details which must be performed
+Presents user with a virtual machine, easier to use
+
+It is a resource manager
+Each program gets time with the resource
+Each program gets space on the resource  4 History of Operating Systems (1) Early batch system
+bring cards to 1401
+read cards to tape
+put tape on 7094 which does computing
+put tape on 1401 which prints output
+
+ 5 History of Operating Systems (2) First generation 1945 - 1955
+vacuum tubes, plug boards
+Second generation 1955 - 1965
+transistors, batch systems
+Third generation  1965 – 1980
+ICs and multiprogramming
+Fourth generation 1980 – present
+personal computers 6 History of Operating Systems (3) Structure of a typical FMS job – 2nd generation 7 History of Operating Systems (4) Multiprogramming system 
+three jobs in memory – 3rd generation 8 Computer Hardware Review (1) Components of a simple personal computer  Monitor  Bus 9 Computer Hardware Review (2) (a) A three-stage pipeline
+(b) A superscalar CPU 10 Computer Hardware Review (3) Typical memory hierarchy
+numbers shown are rough approximations 11 Computer Hardware Review (4) Structure of a disk drive 12 Computer Hardware Review (5) One base-limit pair and two base-limit pairs 13 Computer Hardware Review (6) (a) Steps in starting an I/O device and getting interrupt
+(b) How the CPU is interrupted   (a) (b) 14 Computer Hardware Review (7) Structure of a large Pentium system 15 Operating System Concepts (1) A process tree
+A created two child processes, B and C
+B created three child processes, D, E, and F 16 Operating System Concepts (2) (a) A potential deadlock. (b) an actual deadlock. 17 Operating System Concepts (3) File system for a university department 18 Operating System Concepts (4) Before mounting, 
+files on floppy are inaccessible
+After mounting floppy on b,
+files on floppy are part of file hierarchy 19 Operating System Concepts (5) Two processes connected by a pipe 20 Steps in Making a System Call  There are 11 steps in making the system call
+                 read (fd, buffer, nbytes)"
+15," 1 Introduction A computer system consists of
+hardware
+system programs
+application programs 2 What is an Operating System It is an extended machine
+Hides the messy details which must be performed
+Presents user with a virtual machine, easier to use
+
+It is a resource manager
+Each program gets time with the resource
+Each program gets space on the resource  3 History of Operating Systems (1) Early batch system
+bring cards to 1401
+read cards to tape
+put tape on 7094 which does computing
+put tape on 1401 which prints output
+
+ 4 History of Operating Systems (2) First generation 1945 - 1955
+vacuum tubes, plug boards
+Second generation 1955 - 1965
+transistors, batch systems
+Third generation  1965 – 1980
+ICs and multiprogramming
+Fourth generation 1980 – present
+personal computers 5 The Operating System Zoo Mainframe operating systems
+Server operating systems
+Multiprocessor operating systems
+Personal computer operating systems
+Real-time operating systems
+Embedded operating systems
+Smart card operating systems 6 Computer Hardware Review (1) Components of a simple personal computer  Monitor  Bus 7 Computer Hardware Review (2) (a) A three-stage pipeline
+(b) A superscalar CPU 8 Computer Hardware Review (3) Typical memory hierarchy
+numbers shown are rough approximations 9 Computer Hardware Review (4) Structure of a disk drive 10 Computer Hardware Review (5) One base-limit pair and two base-limit pairs 11 Computer Hardware Review (6) (a) Steps in starting an I/O device and getting interrupt
+(b) How the CPU is interrupted   (a) (b) 12 Computer Hardware Review (7) Structure of a large Pentium system 13 Operating System Concepts (1) A process tree
+A created two child processes, B and C
+B created three child processes, D, E, and F 14 Operating System Concepts (2) (a) A potential deadlock. (b) an actual deadlock."
+16," OS Basic Concepts Maximum CPU utilization obtained with multiprogramming
+CPU–I/O Burst Cycle – Process execution consists of a cycle of CPU execution and I/O wait
+CPU burst followed by I/O burst
+CPU burst distribution is of main concern
+ Histogram of CPU-burst Times CPU Scheduler Short-term scheduler selects from among the processes in ready queue, and allocates the CPU to one of them
+Queue may be ordered in various ways
+CPU scheduling decisions may take place when a process:
+1.	Switches from running to waiting state
+2.	Switches from running to ready state
+3.	Switches from waiting to ready
+Terminates
+Scheduling under 1 and 4 is nonpreemptive
+All other scheduling is preemptive
+Consider access to shared data
+Consider preemption while in kernel mode
+Consider interrupts occurring during crucial OS activities Dispatcher Dispatcher module gives control of the CPU to the process selected by the short-term scheduler; this involves:
+switching context
+switching to user mode
+jumping to the proper location in the user program to restart that program
+Dispatch latency – time it takes for the dispatcher to stop one process and start another running Scheduling Criteria CPU utilization – keep the CPU as busy as possible
+Throughput – # of processes that complete their execution per time unit
+Turnaround time – amount of time to execute a particular process
+Waiting time – amount of time a process has been waiting in the ready queue
+Response time – amount of time it takes from when a request was submitted until the first response is produced, not output  (for time-sharing environment) First- Come, First-Served (FCFS) Scheduling 		Process	Burst Time	
+		 P1	24
+		 P2 	3
+		 P3	 3 
+Suppose that the processes arrive in the order: P1 , P2 , P3  The Gantt Chart for the schedule is:
+
+Waiting time for P1  = 0; P2  = 24; P3 = 27
+Average waiting time:  (0 + 24 + 27)/3 = 17 FCFS Scheduling (Cont.) Suppose that the processes arrive in the order:
+		 P2 , P3 , P1 
+The Gantt chart for the schedule is:
+
+
+
+Waiting time for P1 = 6; P2 = 0; P3 = 3
+Average waiting time:   (6 + 0 + 3)/3 = 3
+Much better than previous case
+Convoy effect - short process behind long process
+Consider one CPU-bound and many I/O-bound processes Shortest-Job-First (SJF) Scheduling Associate with each process the length of its next CPU burst
+ Use these lengths to schedule the process with the shortest time
+SJF is optimal – gives minimum average waiting time for a given set of processes
+The difficulty is knowing the length of the next CPU request
+Could ask the user Example of SJF 	      	                ProcessArriva	l Time	Burst Time
+		             P1	0.0	6
+		            P2 	2.0	8
+		            P3	4.0	7
+		            P4	5.0	3
+
+SJF scheduling chart
+
+
+
+
+Average waiting time = (3 + 16 + 9 + 0) / 4 = 7 Determining Length of Next CPU Burst Can only estimate the length – should be similar to the previous one
+Then pick process with shortest predicted next CPU burst
+
+Can be done by using the length of previous CPU bursts, using exponential averaging
+
+
+
+
+Commonly, α set to ½
+Preemptive version called shortest-remaining-time-first
+
+ Prediction of the Length of the Next CPU Burst Example of Shortest-remaining-time-first Now we add the concepts of varying arrival times and preemption to the analysis
+		         ProcessA	arri Arrival TimeT	Burst Time
+		 P1	0	8
+		 P2 	1	4
+		 P3	2	9
+		 P4	3	5
+Preemptive SJF Gantt Chart
+
+
+
+Average waiting time = [(10-1)+(1-1)+(17-2)+5-3)]/4 = 26/4 = 6.5 msec
+
+ Priority Scheduling A priority number (integer) is associated with each process
+
+The CPU is allocated to the process with the highest priority (smallest integer  highest priority)
+Preemptive
+Nonpreemptive
+
+SJF is priority scheduling where priority is the inverse of predicted next CPU burst time
+
+Problem  Starvation – low priority processes may never execute
+
+Solution  Aging – as time progresses increase the priority of the process
+ Example of Priority Scheduling 		         ProcessA	arri Burst TimeT	Priority
+		 P1	10	3
+		 P2 	1	1
+		 P3	2	4
+		 P4	1	5
+		P5	5	2
+
+Priority scheduling Gantt Chart
+
+
+
+
+Average waiting time = 8.2 msec Round Robin (RR) Each process gets a small unit of CPU time (time quantum q), usually 10-100 milliseconds.  After this time has elapsed, the process is preempted and added to the end of the ready queue.
+If there are n processes in the ready queue and the time quantum is q, then each process gets 1/n of the CPU time in chunks of at most q time units at once.  No process waits more than (n-1)q time units.
+Timer interrupts every quantum to schedule next process
+Performance
+q large  FIFO
+q small  q must be large with respect to context switch, otherwise overhead is too high Example of RR with Time Quantum = 4 		Process	Burst Time
+		P1	24
+		 P2	 3
+		 P3	3	
+The Gantt chart is: 
+Typically, higher average turnaround than SJF, but better response
+q should be large compared to context switch time
+q usually 10ms to 100ms, context switch < 10 usec Time Quantum and Context Switch Time"
+17," An Introduction to Operating Systems Definition An Operating System, or OS, is low-level software that enables a user and higher-level application software to interact with a computer’s hardware and the data and other programs stored on the computer.
+An OS performs basic tasks, such as recognizing input from the keyboard, sending output to the display screen, keeping track of files and directories on the disk, and controlling peripheral devices such as printers. 
+ UNIX UNIX was one of the first operating systems to be written, in 1971.
+
+Advantages of UNIX are…
+
+Multitasking – multiple programs can run at one time. 
+     
+Multi-user – allows more than a single user to work at any given time. This is accomplished by sharing processing time between each user.
+
+Safe – prevents one program from accessing memory or storage space allocated to another program, and enables file protection, requiring users to have permission to perform certain functions, such as accessing a directory, file, or disk drive.
+ Types of OS Microsoft Windows
+
+Mainframe 
+
+DOS
+
+OS/2
+
+Linux 
+
+Mac OS
+
+AmigaOS Types Of OS Evolution of Windows Evolution of OS/2  "
+18," Operating System Memory-Management Unit (MMU) Hardware device that at run time maps virtual to physical address
+Many methods possible, covered in the rest of this chapter
+To start, consider simple scheme where the value in the relocation register is added to every address generated by a user process at the time it is sent to memory
+Base register now called relocation register
+MS-DOS on Intel 80x86 used 4 relocation registers
+The user program deals with logical addresses; it never sees the real physical addresses
+Execution-time binding occurs when reference is made to location in memory
+Logical address bound to physical addresses Dynamic relocation using a relocation register Routine is not loaded until it is called
+Better memory-space utilization; unused routine is never loaded
+All routines kept on disk in relocatable load format
+Useful when large amounts of code are needed to handle infrequently occurring cases
+No special support from the operating system is required
+Implemented through program design
+OS can help by providing libraries to implement dynamic loading Dynamic Linking Static linking – system libraries and program code combined by the loader into the binary program image
+Dynamic linking –linking postponed until execution time
+Small piece of code, stub, used to locate the appropriate memory-resident library routine
+Stub replaces itself with the address of the routine, and executes the routine
+Operating system checks if routine is in processes’ memory address
+If not in address space, add to address space
+Dynamic linking is particularly useful for libraries
+System also known as shared libraries
+Consider applicability to patching system libraries
+Versioning may be needed Swapping A process can be swapped temporarily out of memory to a backing store, and then brought back into memory for continued execution
+Total physical memory space of processes can exceed physical memory
+Backing store – fast disk large enough to accommodate copies of all memory images for all users; must provide direct access to these memory images
+Roll out, roll in – swapping variant used for priority-based scheduling algorithms; lower-priority process is swapped out so higher-priority process can be loaded and executed
+Major part of swap time is transfer time; total transfer time is directly proportional to the amount of memory swapped
+System maintains a ready queue of ready-to-run processes which have memory images on disk Swapping (Cont.) Does the swapped out process need to swap back in to same physical addresses?
+Depends on address binding method
+Plus consider pending I/O to / from process memory space
+Modified versions of swapping are found on many systems (i.e., UNIX, Linux, and Windows)
+Swapping normally disabled
+Started if more than threshold amount of memory allocated
+Disabled again once memory demand reduced below threshold
+ Schematic View of Swapping Paging Physical  address space of a process can be noncontiguous; process is allocated physical memory whenever the latter is available
+Avoids external fragmentation
+Avoids problem of varying sized memory chunks
+Divide physical memory into fixed-sized blocks called frames
+Size is power of 2, between 512 bytes and 16 Mbytes
+Divide logical memory into blocks of same size called pages
+Keep track of all free frames
+To run a program of size N pages, need to find N free frames and load program
+Set up a page table to translate logical to physical addresses
+Backing store likewise split into pages
+Still have Internal fragmentation Address Translation Scheme Address generated by CPU is divided into:
+Page number (p) – used as an index into a page table which contains base address of each page in physical memory
+Page offset (d) – combined with base address to define the physical memory address that is sent to the memory unit
+
+
+
+
+For given logical address space 2m and page size 2n Paging Hardware Paging Model of Logical and  Physical Memory Paging (Cont.) Calculating internal fragmentation
+Page size = 2,048 bytes
+Process size = 72,766 bytes
+35 pages + 1,086 bytes
+Internal fragmentation of 2,048 - 1,086 = 962 bytes
+Worst case fragmentation = 1 frame – 1 byte
+On average fragmentation = 1 / 2 frame size
+So small frame sizes desirable?
+But each page table entry takes memory to track
+Page sizes growing over time
+Solaris supports two page sizes – 8 KB and 4 MB
+Process view and physical memory now very different
+By implementation process can only access its own memory Implementation of Page Table Page table is kept in main memory
+Page-table base register (PTBR) points to the page table
+Page-table length register (PTLR) indicates size of the page table
+In this scheme every data/instruction access requires two memory accesses
+One for the page table and one for the data / instruction
+The two memory access problem can be solved by the use of a special fast-lookup hardware cache called associative memory or translation look-aside buffers (TLBs) Implementation of Page Table (Cont.) Some TLBs store address-space identifiers (ASIDs) in each TLB entry – uniquely identifies each process to provide address-space protection for that process
+Otherwise need to flush at every context switch
+TLBs typically small (64 to 1,024 entries)
+On a TLB miss, value is loaded into the TLB for faster access next time
+Replacement policies must be considered
+Some entries can be wired down for permanent fast access Associative Memory Associative memory – parallel search 
+
+
+
+
+
+Address translation (p, d)
+If p is in associative register, get frame # out
+Otherwise get frame # from page table in memory
+ Paging Hardware With TLB"
+19," 1 Operating System  2 Memory Management	 Ideally programmers want memory that is
+large
+fast
+non volatile
+
+Memory hierarchy 
+small amount of fast, expensive memory – cache 
+some medium-speed, medium price main memory
+gigabytes of slow, cheap disk storage
+
+Memory manager handles the memory hierarchy
+ 3 Basic Memory ManagementMonoprogramming without Swapping or Paging Three simple ways of organizing memory
+- an operating system with one user process 4 Multiprogramming with Fixed Partitions Fixed memory partitions
+separate input queues for each partition
+single input queue 5 Virtual MemoryPaging (1) The position and function of the MMU 6 Paging (2) The relation betweenvirtual addressesand physical memory addres-ses given bypage table 7 Page  Tables (1) Internal operation of MMU with 16 4 KB pages 8 Page Tables (2) 32 bit address with 2 page table fields
+Two-level page tables   Second-level page tables  Top-level 
+page table 9 Page Tables (3) Typical page table entry 10 TLBs – Translation Lookaside Buffers A TLB to speed up paging 11 Inverted Page Tables Comparison of a traditional page table with an inverted page table 12 Page Replacement Algorithms Page fault forces choice 
+which page must be removed
+make room for incoming page
+
+Modified page must first be saved
+unmodified just overwritten
+
+Better not to choose an often used page
+will probably need to be brought back in soon 13 Optimal Page Replacement Algorithm Replace page needed at the farthest point in future
+Optimal but unrealizable
+
+Estimate by …
+logging page use on previous runs of  process
+although this is impractical 14 Not Recently Used Page Replacement Algorithm Each page has Reference bit, Modified bit
+bits are set when page is referenced, modified
+Pages are classified
+not referenced, not modified
+not referenced, modified
+referenced, not modified
+referenced, modified
+NRU removes page at random
+from lowest numbered non empty class 15 FIFO Page Replacement Algorithm Maintain a linked list of all pages 
+in order they came into memory
+
+Page at beginning of list replaced
+
+Disadvantage
+page in memory the longest may be often used 16 Second Chance Page Replacement Algorithm Operation of a second chance
+pages sorted in FIFO order
+Page list if fault occurs at time 20, A has R bit set(numbers above pages are loading times) 17 The Clock Page Replacement Algorithm 18 Least Recently Used (LRU) Assume pages used recently will used again soon
+throw out page that has been unused for longest time
+
+Must keep a linked list of pages
+most recently used at front, least at rear
+update this list every memory reference !!
+
+Alternatively keep counter in each page table entry
+choose page with lowest value counter
+periodically zero the counter
+ 19 Simulating LRU in Software (1) LRU using a matrix – pages referenced in order 0,1,2,3,2,1,0,3,2,3"
+20," Operating System  Operating Systems Every computer runs programs (applications) that help you do your work, like word processors and browsers.
+Every computer needs software that knows the details of the particular hardware you have and can communicate with all your applications and with you.  This is the Operating System.
+Several kinds of OS’s – Windows 7, 8, 10, Linux, MacOS, Unix, Android
+All operating systems have the important job of keeping track of your files: where they are, what’s in them, what they are named. File Names and Extensions You must adhere to file-naming conventions when saving files
+Case sensitivity – upper and lower case are different
+True in Linux and Unix variations, not in Windows
+If “ABC” and “abc” are different names, it IS case sensitive
+Maximum length (Windows 260 characters)
+Spaces allowed – be careful if using multiple spaces, can you see the difference between 2 spaces and three spaces?
+Digits allowed
+\ / : * ? "" < > |   not allowed
+File extensions provide clues to the file contents
+OS uses extensions to know which application created the file and the internal format of the file Standard Filename Extensions    How to Make Extensions Visible in Windows Windows default is NOT to show the common extensions of filenames but we want to SEE them!
+Open a Windows Explorer window
+Choose Organize tab
+Choose Folder and search options
+Choose View tab
+UNcheck the box that says “Hide extensions for known file types”
+Choose “Apply to Folders” File Systems – Drives Every computer has a file system used to keep track of the files on that machine
+File systems are based on physical storage devices, known as drives
+Drives can be local or remote (network or cloud)
+Click on “My Computer” or “This PC” to see a list of drives (on a Windows machine) File Systems – Partitions Note that a “partition” is not a physical device, although it looks like one to the OS.  
+Why have a partition?  At one point Windows could only handle storage devices of a certain size.  If your hard drive was larger than that size, you could not access the entire device.  Partitions fool the OS into thinking that one device is two (or more!) devices, each with their own letter and file system  So by accessing the two devices, you could use all your storage.
+You will find disks partitioned even today, when some space is used for a specific need, like a backup File Management The operating system provides an organizational structure to the computer’s data and programs
+Hierarchical structure of directories:
+Drives
+Folders
+and more Folders …
+Files
+Storage metaphors help you visualize and mentally organize the files on your disks and other storage devices
+ A File System Tree (2 devices) File Management Metaphors Tree Metaphor
+Root, branches, leaves
+
+Filing Cabinet Metaphor
+Drawers, Folders, Files File Directories and Folders Every storage device has a directory containing a list of its files
+Root directory  (like “C:\”)
+Subdirectory
+Depicted as folders
+A computer’s file location is defined by a path
+Examples:   D:\  is the root of the D drive
+Examples:   C:\Notes\CS 101\Week 1\notes.txt
+Examples:    F:\1999\Music\CDs\Prince\  Reasons for using folders Organization of files makes them easier to find, less stress
+Easier to manipulate groups of files as one thing – moving, copying, deleting, mailing
+Allows reuse of filenames, as long as the files are in different paths – you can have two “A.txt” files as long as they are in different folders
+Can use different applications on the same files – create a file with Excel, zip it with Winzip, 7zip, etc.  Create a video mp4 file with Zoom, play it with Windows Media
+ Units for measuring file sizes One byte = one character, pretty small
+1 Kilobyte = 1024 bytes, about a page of text
+1 Megabyte = 1024 KBs, a 1000-page book
+1 Gigabyte = 1024 MBs  (more than 1 billion bytes), about 1000 books, a library!
+1 Terabyte = 1024 GBs (more than 1 trillion bytes), over 1000 libraries
+1 Petabyte = 1024 TBs (more than 1 quadrillion bytes), over 1 million libraries File Management Tips Use descriptive names
+Maintain file extensions – don’t change one unless you convert the file to that type
+Group similar files into a folder
+Organize your folders from the top down
+Consider using default folders but consider putting folders inside them – My Documents can be subdivided as you like!
+Do not mix data files and program files in the same folder File Management Tips Don’t store too many files in the root directory – actually slows down the access
+Follow copyright rules
+Delete or archive files you no longer need
+Be aware of storage locations!
+You will not be able to submit your lab test work if you do not know where you put your files!
+Make Backups! Zipping a file or files Files can be compressed by removing the redundancies in them
+Zip also archives them - turns several files into one file, easier to move, copy, upload, etc.
+Created by Phil Katz in 1989
+In Windows, select the files to zip
+Right click on one of them
+Choose ""Send to compressed folder""
+You may need to rename the file afterward Shortcuts Can create another icon which points to a file or folder or program
+Double clicking on it is equivalent to double clicking on what it points to
+But be careful!  The shortcut is NOT a copy of the file!  If the original file is moved or deleted, the shortcut does not work
+When submitting lab tests, be careful of this! Do not send your TA JUST a bunch of shortcuts!"
+21," Operating System Device Management Organization Application
+Process File
+Manager Device
+Driver  Device Controller Command Status Data         Hardware Interface System Interface     System Call Interface Functions available to application programs
+Abstract all devices (and files) to a few interfaces
+Make interfaces as similar as possible
+Block vs character
+Sequential vs direct access
+Device driver implements functions (one entry point per API function) Example: BSD UNIX Driver open		Prepare dev for operation
+close		No longer using the device
+ioctl		Character dev specific info
+read		Character dev input op
+write		Character dev output op
+strategy	Block dev input/output ops
+select	Character dev check for data
+stop		Discontinue a stream output op  Read with Polling read(device, …); Data    Device Controller Command Status Data    read function write function      1 2 3 4 5  Hardware Interface System Interface Read Using Interrupts  read(device, …); Data    Device Controller Command Status Data    read driver write driver 1 2 3 4 5  Hardware Interface System Interface      Device Status Table Device
+Handler Interrupt
+Handler           6 7 8a 8b 9 Driver-Kernel Interface Drivers are distinct from main part of kernel
+Kernel makes calls on specific functions, drivers implement them
+Drivers use kernel functions for:
+Device allocation
+Resource (e.g., memory) allocation
+Scheduling
+etc. (varies from OS to OS) Reconfigurable Drivers Other
+Kernel
+services      Entry Points for Device j open(){…} read(){…} etc.        System call interface Driver for Device j NT Driver Organization NT Device Drivers API model is the same as for a file
+Extend device management by adding modules to the stream
+Device driver is invoked via an Interrupt Request Packet (IRP)
+IRP can come from another stream module
+IRP can come from the OS 
+Driver must respond to minimum set of IRPs
+See Part I of notes Memory Mapped I/O  Primary
+Memory    Device 0    Device 1    Device n-1  Primary
+Memory    Device 0    Device 1    Device n-1 Device Addresses Memory Addresses    Memory Addresses   CPU-I/O Overlap       Variable x   Register  Data on device  . . .
+read(dev_I, “%d”, x);
+y = f(x)
+. . .  Device dev_I Memory CPU . . .
+startRead(dev_I, “%d”, x);
+. . .
+While(stillReading()) ;
+y = f(x)
+. . . I/O - CPU Overlap             App 1 App 2 I/O Ctlr t1 t2 t3 t4               App I/O Ctlr t1 t2 t3 t4 t5 t6 t7 t8 t9 Overlapping App 1’s I/O with App 2 Overlapping App CPU with its own I/O Direct Memory Access  Primary
+Memory  CPU  Controller  Device        Primary
+Memory  CPU  Controller  Device           Buffering                  Water Company Customer Office       Water Consumers Water Producer   Delivering Water Returning the Empties  Water bottles are buffers
+ Office workers consume water from a buffer while
+  water company fills other buffers Hardware Buffering Process   Controller Data  Device   Process   Controller B  Device    A Unbuffered Process reads bi-1
+Controller reads bi Hardware Buffering Process   Controller Data  Device   Process   Controller B  Device    A Process   Controller B  Device    A Unbuffered Process reads bi-1
+Controller reads bi Process reads bi
+Controller reads bi+1 Buffering in the Driver   Process   Controller B  Device  A    B  A   Hardware Driver   Buffering in the Driver Process   Controller B  Device  A Process   Controller B  Device   A    B  A   B  A     Hardware Driver A Ring Buffer         From data producer To data consumer     Buffer i Buffer j Compute vs I/O Bound       Compute-bound I/O-bound Time Disk Optimizations Transfer Time: Time to copy bits from disk surface to memory
+Disk latency time: Rotational delay waiting for proper sector to rotate under R/W head
+Disk seek time: Delay while R/W head moves to the destination track/cylinder
+Access Time = seek + latency + transfer Optimizing Seek Time Multiprogramming on I/O-bound programs => set of processes waiting for disk
+Seek time dominates access time => minimize seek time across the set
+Tracks 0:99; Head at track 75, requests for 23, 87, 36, 93, 66
+FCFS: 52+ 64 + 51 + 57 + 27 = 251 steps Optimizing Seek Time (cont) Requests = 23, 87, 36, 93, 66 
+SSTF: (75), 66, 87, 93, 36, 23
+11 + 21 + 6 + 57 + 13 = 107 steps
+Scan: (75), 87, 93, 99, 66, 36, 23
+12 + 6 + 6 + 33 + 30 + 13 = 100 steps
+Look: (75), 87, 93, 66, 36, 23
+12 + 6 + 27 + 30 + 13 = 87 steps Optimizing Seek Time (cont) Requests = 23, 87, 36, 93, 66
+Circular Scan: (75), 87, 93, 99, 23, 36, 66
+12 + 6 + 6 + home + 23 + 13 + 30 = 90 + home
+Circular Look: (75), 87, 93, 23, 36, 66
+12 + 6 + home + 23 + 13 + 30 = 84 + home
+"
+22,"  What is an Operating System? What is an Operating System?(User’s view) A program that acts as an intermediary between a user of a computer and the computer hardware
+Defines an interface for the user to use services provided by the system
+Creates an environment for the user
+
+
+ Abstract Machine
+Hides complex details of the underlying hardware
+Provides common API to applications and services
+Simplifies application writing
+Command Interpreter
+Part of a OS that understands and executes commands that are entered interactively by a human being or from a program
+Shell
+ What is an Operating System?(User’s view) Why is abstraction important? Without OSs and abstract interfaces, application writers must program all device access directly
+load device command codes into device registers
+understand physical characteristics of the devices
+
+
+Applications suffer!
+very complicated maintenance and upgrading
+no portability
+ What Operating Systems Do(User’s view) Depends on the point of view
+Single user system
+Users want convenience, ease of use
+Don’t care about resource utilization
+ Optimized for single user experience  What Operating Systems Do(User’s view) Depends on the point of view
+Shared computer such as mainframe must keep all users happy
+Response time minimum
+Keep all the users happy  Shared CPU, memory 
+OS is a resource allocator
+Manages all resources
+Decides between conflicting requests for efficient and fair resource use
+
+OS is a control program
+Controls execution of programs to prevent errors and improper use of the computer What Operating Systems Do
+(Systems view) Types of Systems Batch Systems
+Multiple jobs, but only one job in memory at one time and executed (till completion) before the next one starts
+
+
+  Operating system User program Jobs waiting Types of Systems Multiprogrammed Systems
+Multiple jobs in memory, CPU is multiplexed between them 
+Single user cannot keep CPU and I/O devices busy at all times
+When it has to wait (for I/O for example), OS switches to another job
+Multiprogramming organizes jobs (code and data) so CPU always has one to execute
+A subset of total jobs in system is kept in memory
+One job selected and run via job scheduling
+
+
+ Effective resource utilization
+Poor user experience   Time-sharing Systems (multitasking) 
+ logical extension of multiprogramming in which CPU switches jobs so frequently that users can interact with each job while it is running, creating interactive computing
+Response time should be < 1 second
+Each user has at least one program executing in memory
+If several jobs ready to run at the same time  CPU scheduling
+ Types of Systems Low Response time Low Response time Role of Operating system Computer system can be divided into four components:
+Hardware – provides basic computing resources
+CPU, memory, I/O devices
+Application programs – define the ways in which the system resources are used to solve the computing problems of the users
+Word processors, compilers, web browsers, database systems, video games
+Users
+People, machines, other computers
+Operating system
+Controls and coordinates use of hardware among various applications and users
+ Process Management A process is a program in execution. Program is a passive entity, process is an active entity.
+Process needs resources to accomplish its task
+CPU time
+Representation of process
+Process has one program counter specifying location of next instruction to execute
+Data structure (stores information of a process)
+Many processes may be associated with the same program 
+Typically system has many processes
+some user processes, 
+some operating system processes
+Life cycle of a process 
+States
+Arrival, Computation, I/O, I/O completion, termination
+ Process Management Activities      
+Creating and deleting both user and system processes
+Suspending and resuming processes
+Process scheduling
+Providing mechanisms for process synchronization
+Providing mechanisms for process communication
+Providing mechanisms for deadlock handling The operating system is responsible for the following activities in connection with process management:     P1 P2 R1 R2     R1 R2 P1 P2 Memory Management 
+All instructions and data in memory in order to execute
+Translate the logical address to physical address
+
+
+
+
+
+Process terminates => MMU declares that the memory space is available
+Multiprogramming: Memory management manages several processes in memory 
+Optimizing CPU utilization and computer response to users
+Ensure memory protection
+Track illegal address 
+
+Memory management activities
+Keeping track of which parts of memory are currently being used and by which process
+Allocating and deallocating memory space as needed
+Introduces Virtual memory
+If the process size is bigger than the RAM size
+Hardware support   Process Memory Management Unit  Logical address Physical address CPU File Management OS provides uniform, logical view of information storage
+Abstracts physical properties to logical storage unit  - File
+File => Collection of related information defined by the creator 
+Each medium is controlled by device (i.e., disk drive, tape drive)
+Varying properties include access speed, capacity, data-transfer rate, access method (sequential or random)
+
+
+
+    User Files (user’s view) Disk (sector, track)  Device Driver  Physical media Mapping File Management OS provides uniform, logical view of information storage
+Abstracts physical properties to logical storage unit  - file
+Each medium is controlled by device (i.e., disk drive, tape drive)
+Varying properties include access speed, capacity, data-transfer rate, access method (sequential or random)
+
+OS implements the abstract concept of file by managing mass storage media (disk etc) and devices that control them 
+
+
+Files usually organized into directories
+Access control on most systems to determine who can access what
+File-System management
+Creating and deleting files and directories
+Primitives to manipulate files and dirs
+Mapping files onto secondary storage Usually disks used to store data that does not fit in main memory or data that must be kept for a “long” period of time
+Most of the programs are stored on disk
+Proper management is of central importance
+Entire speed of computer operation depends on disk subsystem and its algorithms
+OS activities
+Storage allocation (logical blocks)
+Free-space management 
+Disk scheduling Disk Management I/O Subsystem One purpose of OS is to hide peculiarities of hardware devices from the user
+
+I/O subsystem responsible for
+Memory management of I/O including buffering (storing data temporarily while it is being transferred), caching (storing parts of data in faster storage for performance)
+General device-driver interface
+Drivers for specific hardware devices
+  I/O devices  Device Drivers  I/O subsystem (general interface)"
+23," Operating System  27 March 2003 Operating Systems: Process Management 2 1. Monolithic Kernel 27 March 2003 Operating Systems: Process Management 3 Microkernel 27 March 2003 Operating Systems: Process Management 4 Process Variables point to instructions + data 
+Loaded in memory
+context contains all process state info.
+stored in Process Control Block
+One user and one program per process
+Also called task
+(or job for batch processes) 27 March 2003 Operating Systems: Process Management 5 Process Context program counter
+register indicating next program instruction to run
+other registers 
+accumulator, index/address, status, general
+stack of subroutine return addresses
+subroutines call other subroutines
+values of local and global variables
+pointers to open data files
+user and terminal number (in multi-user OS) 27 March 2003 Operating Systems: Process Management 6 Examples of Processes User Processes
+Shells
+Text editors, databases
+Background jobs (end with & in UNIX)
+System Processes
+Memory management, process scheduling
+daemons (system background processes)
+Mail and print servers 27 March 2003 Operating Systems: Process Management 7 Thread Also called sub- or lightweight process
+Little private memory; memory is shared
+Subdivides work of the process
+Threads are managed by the process 
+Reduces high overhead for creating processes and context switching
+Java was designed to write thread-based programs 27 March 2003 Operating Systems: Process Management 8 Thread Components At minimum, every thread has its own
+program counter
+stack
+Program text shared with other threads
+Each procedure has a frame to hold its local variables
+Heap of objects is shared by all threads 27 March 2003 Operating Systems: Process Management 9 Uses of Threads Servers (database, mail, print, etc.)
+one thread per client request
+Network server
+one thread per connection
+Time-sharing 
+one thread per user
+Real-time factory control
+one thread per device 27 March 2003 Operating Systems: Process Management 10 Context Switching Preserve state of current process
+Start or re-start another process
+Performed by dispatcher (OS component)
+When to change context?
+Overhead cost (takes CPU time)
+Processes prioritised by properties 27 March 2003 Operating Systems: Process Management 11 4. Process States Runnable
+Running (only one per processor)
+Ready (waiting for its turn to run)
+Blocked
+Explicit e.g. wait() until a child terminates
+Implicit e.g. read()
+Blocked by another process
+New (not yet allowed to wait its turn)
+Suspended (e.g. swapped to virtual memory)
+Terminated (finished but still using resources) 27 March 2003 Operating Systems: Process Management 12 Process State DiagramRitchie p. 62 ready running blocked ready suspended blocked suspended             entry (HLS) I/O completion I/O completion suspend resume termination I/O wait (MLS)suspend resume (LLS) dispatch timeout suspend 27 March 2003 Operating Systems: Process Management 13 5. Scheduling Assign each process time to use CPU
+Determine sequence (order), timing (when)
+Conflicting objectives  need compromise
+Scheduling levels
+High: whether to admit a new process
+Medium: suspend/resume a process
+Low: dispatch (run) a ready process 27 March 2003 Operating Systems: Process Management 14 Scheduling Objectives Maximise throughput
+Give all users a “fair” (not equal) chance
+Provide tolerable performance 
+Response time for on-line user
+Turnaround time for batch users
+Degrade performance gracefully
+OK to be slow but avoid complete collapse
+Be consistent, predictable over time 27 March 2003 Operating Systems: Process Management 15 Scheduling Criteria Priority which may be either/both:
+Assigned to job by user
+Determined by properties of the job
+Class of job (real-time > on-line > batch)
+Resources needed (CPU time, memory)
+I/O or CPU bound (the aim is a balance)
+Resources already used
+Time already waited 27 March 2003 Operating Systems: Process Management 16 Types of Scheduling Policies Preemptive (Used by most OS today)
+OS stops one process to run another
+Non-preemptive
+process runs until termination or I/O wait
+Cooperative (Used by Windows 3.11)
+Programs must voluntarily give up CPU
+Not managed by OS; trusts programmers
+If a process hangs the whole PC hangs  27 March 2003 Operating Systems: Process Management 17 Scheduling Policies First come first served (FCFS/FIFO)
+Shortest job first (SJF)
+Shortest remaining time (SRT)
+Highest response ratio next
+Round robin (RR)
+Multi-level feedback queues (MFQ)"
+24," Human Resource Management   Copyright © 2012 by Cengage Learning. All rights reserved. 1- 2 Human Resources (HR) Human resources are the people an organization employs to carry out various jobs, tasks, and functions in exchange for wages, salaries, and other rewards.  Copyright © 2012 by Cengage Learning. All rights reserved. 1- 3 What Is Human Resource Management (HRM) ?  The comprehensive set of managerial activities and tasks concerned with developing and maintaining a qualified workforce - human resources – in ways at contribute to organizational effectiveness.  Copyright © 2012 by Cengage Learning. All rights reserved. 1- 4 Contemporary Human Resource Management Perspectives In most organizations today, the role of human resource management has become quite important. This results partly from a growing realization of the importance of people as a source of competitive advantage, but there are more practical reasons, such as:
+Passage of Title VII of the Civil Rights Act made it clear that organizations had to find ways to hire, reward, and manage people effectively within the limits of the law.
+  Copyright © 2012 by Cengage Learning. All rights reserved. 1- 5 Scientific management,
+one of the earliest approaches
+to management, was concerned
+with how to structure individual
+jobs to maximize efficiency and
+productivity. 
+     The human relations era was marked by an emphasis on finding ways to keep workers happy, since it was assumed that “happy workers were productive workers.” As organizations grew, they 
+created specialized units—
+personnel departments—
+to work with employees. 
+This new type of management 
+function was called
+       personnel management.        The 1964 Civil Rights Act, as 
+well as other legal regulations, 
+made the process of hiring and 
+promoting employees more
+complex, creating a need for 
+HR specialists    Evolution of the Human Resource Function  Copyright © 2012 by Cengage Learning. All rights reserved. 1- 6 Human Resource Management in the Electronic Age Electronic technology has not drastically affected the basic approach to how we manage human resources, but certainly had an effect on how HRM systems are delivered.  Copyright © 2012 by Cengage Learning. All rights reserved. 1- 7 Emerging Human Resource Challenges HR managers face an array of new challenges including:
+financial crises
+how stress is becoming a major factor in people’s lives 
+Knowledge workers: employees  whose jobs are primarily concerned 
+	with the acquisition of knowledge, 
+	and HR managers play a role in 
+	applying that knowledge.   Copyright © 2012 by Cengage Learning. All rights reserved. 1- 8 Promoting Individual Growth & Development Another goal for HR managers is promoting the personal growth and development of its employees by offering:
+Education
+Skills training 
+Career development  Copyright © 2012 by Cengage Learning. All rights reserved. 1- 9 HR Management as a Staff Versus Line Function Line managers:  those directly responsible for creating goods and services.
+Staff managers: those responsible for supporting line management’s efforts to achieve organizational roles and objectives.
+Many organizations have blurred this distinction.
+   Copyright © 2012 by Cengage Learning. All rights reserved. 1- 10 Human Resource Management in Smaller Organizations Small organizations still use operating managers to handle their basic human resource functions.
+
+Small independent businesses are generally operated in the same way as small organizations.
+
+Very small organizations are exempt from many legal regulations.  Copyright © 2012 by Cengage Learning. All rights reserved. 1- 11 Human Resource Management in Larger Organizations As the organization grows a separate human resource unit becomes a necessity.
+
+When an organization reaches 200 to 250 employees, it generally establishes a self-contained human resource department.
+
+As the organization continues to grow the human resource department grow as well into specialized departments."
+25," Primary Care Research: An Introduction (To Some Really Important Concepts) Developing Your Question 
+
+Don’t let methodology drive the question! The Research Process Identification of general problem/question
+Literature review
+Specify questions/hypotheses
+Determination of design/methodology
+Data collection
+Data analysis/presentation
+Interpretation of findings The Right and the Left Quantitative research - numbers, numbers, numbers
+Qualitative research - words, words, words Quantitative vs. Qualitative: Assumptions about the World Based upon the idea of “logical positivism”, that is, there is a singular reality with stable, social facts that are separate from the feelings and beliefs of individuals. Based on the notion of “constructivism”, which assumes multiple realities that are socially constructed through individual and collective perceptions or views of the same situation. Quantitative vs. Qualitative: Research Purpose Seeks to establish relationships and explain causes of changes in measured variables.  That is, the goal of science is to explain and predict. Concern is with the understanding of the social phenomenon from the participants’ perspectives.  This requires, to some degree, researcher participation. Quantitative vs. Qualitative: Methods and Process The scientific method, also known as a priori or pre-established design. Use of emergent design utilizing constant comparison and revision. Quantitative vs. Qualitative: Prototypical Studies Experimental or correlational designs are used to reduce error, bias and the influence of extraneous variables--control of bias is through design. Use of ethnography, which helps readers understand the multiple perspectives of the situation by the persons studied.  Subjectivity in data analysis and interpretation is acknowledged. Quantitative vs. Qualitative: Researcher Role Detachment from study in order to avoid bias. Immersion in situation and the phenomenon being studied. Quantitative vs. Qualitative: Context Context-free generalizations Generalizations are contextually-bound. Quantitative vs. Qualitative: Precision Obtained through the use of measurement and statistics Provided by detailed description of phenomenon Quantitative vs. Qualitative: Verification Results replicated by others. Extension of understandings by others."
+26," What Is a DBMS? What is a database?
+A (possibly very large, ) integrated collection of data.
+Models real-world enterprise.
+ Entities (e.g., students, courses)
+ Relationships (e.g., Madonna is taking CS341)
+
+A Database Management System (DBMS) is a software package designed to store and manage databases. Custom application & Files vs. DBMS Application must move large datasets between main memory and secondary storage (e.g., buffering, page-oriented access, 32-bit addressing, etc.)
+
+Special code for different queries (questions to be answered)
+
+Must protect data from inconsistency due to multiple concurrent users
+
+Crash recovery
+
+Security and access control   Why Use a DBMS? Data independence and efficient access.
+Reduced application development time.
+Data integrity and security.
+Uniform data administration.
+Concurrent access, recovery from crashes.    Why Study Databases?? Shift from computation to information
+
+Datasets increasing in diversity and volume.  
+Digital libraries, interactive video, Human Genome project, EOS project  
+...  need for DBMS exploding
+
+DBMS encompasses most of CS
+OS, languages, theory, AI,  multimedia, logic ?   Data Models A data model  is a collection of high level concepts for describing data.
+A schema is a description of a particular collection of data, using the a given data model.
+The relational model of data is the most widely used model today.
+Main concept:  relation, basically a table with rows and columns. A set of records
+Every relation has a schema, which describes the columns, or fields.   Levels of Abstraction Many views, a conceptual (logical) schema, and a physical schema.
+Views describe how users see the data.                                        
+Conceptual schema defines logical structure
+Physical schema describes the files and indexes used.    Schemas are defined using DDL; data is modified/queried using DML.     Physical Schema Conceptual Schema View 1 View 2 View 3             Example: University Database Conceptual schema:                  
+ Students(sid: string, name: string, login: string, 
+			  age: integer, gpa:real)
+ Courses(cid: string, cname:string, credits:integer) 
+ Enrolled(sid:string, cid:string, grade:string)
+Physical schema:
+Relations stored as unordered files. 
+Index on first column of Students.
+External Schema (View): 
+Course_info(cid:string,enrollment:integer) Data Independence * Applications insulated from how data is structured and stored.
+
+Logical data independence:  Protection from changes in logical structure of data.
+Physical data independence:   Protection from changes in physical structure of data.  One of the most important benefits of using a DBMS! Concurrency Control Concurrent execution of user programs             is essential for good DBMS performance.
+Shared use 
+Keep cpu working on several user programs concurrently (disk accesses are frequent, and slow).
+Interleaving actions can lead to inconsistency: e.g., check is cleared while account balance is being computed.
+DBMS ensures such problems don’t arise:  users can pretend they are using a single-user system. Transaction: An Execution of a DB Program Key concept is transaction, which is an atomic sequence of database actions (reads/writes).
+
+A transaction, executed completely, must leave the DB in a consistent state if it is consistent when the transaction begins.
+the DBMS does not understand the semantics of the data.  (e.g., how the interest on account is computed). 
+Users can specify integrity constraints on the data, and the DBMS will enforce them.
+Ensuring that a transaction (run alone) preserves consistency is ultimately the user’s responsibility! Scheduling Concurrent Transactions DBMS ensures that execution of {T1, ... , Tn} is equivalent to some serial execution T1’ ... Tn’.
+
+Before reading/writing an object, a transaction requests a lock on the object, and waits till the DBMS gives it the lock.  All locks are released at the end of the transaction. 
+
+Idea: If an action of Ti (say, writing X) affects Tj (which perhaps reads X), one of them, say Ti, will obtain the lock on X first and Tj is forced to wait until Ti completes; this effectively orders the transactions.
+What if Tj already has a lock on Y and Ti later requests a lock on Y? (Deadlock!) Ti or Tj is aborted and restarted!  Ensuring Atomicity DBMS ensures atomicity (all-or-nothing property) even if system crashes in the middle of a Xact.
+
+Idea: Keep a log (history) of all actions carried out by the DBMS while executing a set of Xacts:
+Before a change is made to the database, the corresponding log entry is forced to a safe location. OS support for this is often inadequate.)
+After a crash, the effects of partially executed transactions are undone using the log. (Thanks to WAL, if log entry wasn’t saved before the crash, corresponding change was not applied to database!)   The Log The following actions are recorded in the log:
+Ti writes an object:  The old value and the new value.
+Log record must go to disk before the changed page!
+Ti commits/aborts:  A log record indicating this action.
+Log records chained together by Xact id, so it’s easy to undo a specific Xact (e.g., to resolve a deadlock).
+Log is often duplexed and archived on “stable” storage.
+All log related activities (and in fact, all CC related activities such as lock/unlock, dealing with deadlocks etc.) are handled transparently by the DBMS.   Databases make these folks happy ... End users and DBMS vendors
+DB application programmers
+E.g., smart webmasters
+Database administrator (DBA)
+Designs logical /physical schemas
+Handles security and authorization
+Data availability, crash recovery 
+Database tuning as needs evolve Must understand how a DBMS works!   Structure of a DBMS A typical DBMS has a layered architecture.
+
+This is one of several possible architectures; each system has its own variations.
+
+ The figure does not show the concurrency control and recovery components     These layers
+must consider
+concurrency
+control and
+recovery   "
